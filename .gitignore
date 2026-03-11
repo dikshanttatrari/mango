@@ -1,0 +1,14 @@
+# Node dependencies
+node_modules/
+
+# Security & API Keys
+.env
+
+# WhatsApp Session Data (CRITICAL to ignore)
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Personal AI Memory (Keep your private data off the internet!)
+memory/context.md
+
+channels/.env

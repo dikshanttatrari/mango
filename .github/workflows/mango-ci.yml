@@ -1,0 +1,32 @@
+name: Mango Core CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x] # Tests your code on a stable, modern Node version
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm' # Speeds up the workflow by caching your node_modules
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Syntax Check
+      # This acts as a dry-run. It checks your code for fatal errors without actually booting up the bots.
+      run: node --check index.js
